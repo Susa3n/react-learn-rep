@@ -1,17 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from './react';
+import ReactDOM from './react-dom';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+// let element = (
+//   <div className='title' style={{color: 'red'}}>
+//     <span>hello</span> world
+//   </div>
+// )
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+// 将jsx语法经过babel编译，编译成函数式，实现createElement方法，返回一个虚拟dom
+let element = React.createElement("div", {
+  className: "title",
+  style: {
+    color: 'red'
+  }
+}, /*#__PURE__*/React.createElement("span", null, "hello"), " world");
+
+// console.log(JSON.stringify(element,null,2)); 
+/*#__PURE__*/
+
+
+
+
+// 实现render方法，将虚拟dom编译成真实dom插入到页面中
+ReactDOM.render(element, document.getElementById('root'));
+
+
