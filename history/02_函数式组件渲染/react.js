@@ -1,5 +1,5 @@
 import {wrapDom} from './utils'
-import Component from './Component'
+
 // 将虚拟dom进行整合
 function createElement(type,config,Children) {
   if(config) {
@@ -18,4 +18,4 @@ function createElement(type,config,Children) {
   }
 }
 
-export default {createElement,Component}
+export default {createElement}

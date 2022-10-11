@@ -11,11 +11,7 @@ function createDOM(vdom) {
   if(type === TYPE_TEXT) {
     dom = document.createTextNode(props.content)
   }else if(typeof type == 'function') { // 说明是一个函数式组件
-    if(type.isReactComponent) { // 说明是一个类组件
-      return mountClassComponent(vdom)
-    }else {
-      return mountFunctionComponent(vdom)
-    }
+    return mountFunctionComponent(vdom)
   }else  {
     dom = document.createElement(type)
   }
@@ -34,13 +30,6 @@ function createDOM(vdom) {
   return dom
 
 }
-function mountClassComponent(vdom) {
-  const {type,props} = vdom // 拿到类以及属性
-  const classInstance = new type(props) // 通过类产生一个类的实例
-  const renderVdom = classInstance.render() // 生成虚拟dom
-  return createDOM(renderVdom) // 渲染真实dom并挂载
-}
-
 function mountFunctionComponent(vdom) {
   const {type,props} = vdom // 拿到函数以及属性
   const renderVdom = type(props) // 执行函数拿到虚拟dom编译成真实dom
