@@ -2,6 +2,7 @@ import { TYPE_TEXT } from './constants'
 
 function render(vdom,container) {
   let newDOM = createDOM(vdom)
+
   container.appendChild(newDOM)
 }
 
@@ -10,9 +11,7 @@ function createDOM(vdom) {
   let dom;
   if(type === TYPE_TEXT) {
     dom = document.createTextNode(props.content)
-  }else if(typeof type == 'function') { // 说明是一个函数式组件
-    return mountFunctionComponent(vdom)
-  }else  {
+  }else {
     dom = document.createElement(type)
   }
 
@@ -30,11 +29,7 @@ function createDOM(vdom) {
   return dom
 
 }
-function mountFunctionComponent(vdom) {
-  const {type,props} = vdom // 拿到函数以及属性
-  const renderVdom = type(props) // 执行函数拿到虚拟dom编译成真实dom
-  return createDOM(renderVdom)  // 再去调用createDOM方法编译真实dom
-}
+
 function reconcileChildren(ChildrenVdom,parentDOM) {
   for (let i = 0; i < ChildrenVdom.length; i++) {
     const childVDOM = ChildrenVdom[i];
